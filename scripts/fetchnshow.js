@@ -12,19 +12,21 @@ async function getData(url){
 
 let appendData = (data,location) =>{
     location.innerHTML = "";
-    data.forEach(({snippet, id:{videoId}}) =>{
+    data.forEach(({snippet, id:{videoId},snippet:title}) =>{
         // let {id:{videoId}} = elem;
         console.log(snippet);
         let div = document.createElement("div");
-        let title = document.createElement("p");
-        title.textContent = snippet.title;
+        let imgdiv = document.createElement("div");
+        let title1 = document.createElement("p");
+        title1.textContent = snippet.title;
         let thumbnail = document.createElement("img");
         thumbnail.src = snippet.thumbnails.medium.url;
         let datatosend = {
             snippet,
-            videoId
+            videoId,
         }
-        div.append(thumbnail,title);
+        imgdiv.append(thumbnail);
+        div.append(imgdiv,title1);
         div.onclick = () =>{
             showVideo(datatosend);
         }

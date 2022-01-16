@@ -33,11 +33,15 @@
 <script type="module">
 
     import navbar from "./components/navbar.js"
+    import {getData, appendData, logstatus} from "./scripts/fetchnshow.js";
     document.querySelector("#header").innerHTML = navbar();
 
-    let logstatus = JSON.parse(localStorage.getItem("logstatus"));
-    let username = logstatus.username;
-    let token = logstatus.token;
+    let logup = document.querySelector("#logup");
+    logstatus(logup);
+
+    let logstat = JSON.parse(localStorage.getItem("logstatus"));
+    let username = logstat.username;
+    let token = logstat.token;
     console.log(username,token);
     let url = `https://masai-api-mocker.herokuapp.com/user/${username}`
     let response = fetch(url, {
@@ -51,10 +55,10 @@
         return res.json();
     }).then((res) =>{
         console.log(res);
-        appendData(res);
+        appendDatas(res);
     })
     
-    let appendData = (data) =>{
+    let appendDatas = (data) =>{
         let x = `<h1>My Account</h1>
                 <table>
             <tr><td><b>Name : </b></td><td>${data.name}</td></tr>

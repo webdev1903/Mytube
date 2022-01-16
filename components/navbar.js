@@ -16,5 +16,3 @@ function navbar(){
 }
 
 export default navbar
-{/* <button id="logup">Login</button>
-    <button id = "signup">SignUp</button> */}

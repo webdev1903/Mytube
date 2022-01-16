@@ -22,12 +22,8 @@ body {
   align-items: center;
 }
 #header > div > input {
-  /* border-radius: 10px; */
   width: 300px;
 }
-/* #header > input:focus{
-            width: 300px;
-        } */
 #header > h1 {
   text-align: start;
   color: white;
@@ -41,14 +37,21 @@ body {
   margin-top: 120px;
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: space-evenly;
   align-items: center;
-  gap: 20px;
 }
 #search_results > div {
-  height: 300px;
-  width: 300px;
-  margin: 10px;
+  border: 1px solid transparent;
+  height: 200px;
+  width: 280px;
+}
+#search_results > div > div {
+  height: 70%;
+  width: 100%;
+}
+#search_results > div > div > img {
+  width: 100%;
+  height: 100%;
 }
 #mytubepng {
   height: 70px;

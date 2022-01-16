@@ -18,19 +18,33 @@
     import navbar from "./components/navbar.js"
     document.querySelector("#header").innerHTML = navbar();
 
-    let logup  = document.querySelector("#logup");
-    logup.addEventListener("click", () =>{
-        window.location.href = "login.html"
-    })
     import {getData, appendData, logstatus} from "./scripts/fetchnshow.js";
-    // console.log(getData, appendData);
-    logstatus(logup);
 
     let container = document.querySelector("#search_results");
 
+    let api = "https://youtube.googleapis.com/youtube/v3/search?part=snippet&q=6gQJRkVleHBsb3Jl&type=Video&key=AIzaSyCzT1ZkIhE3GE0nmGNujgBB05T0hYJXftU&maxResults=50";
+    let res = fetch(api);
+    res.then((resp)=>{
+        return resp.json();
+    }).then((resp) =>{
+        console.log(resp);
+        container.innerHTML = "";
+        appendData(resp.items, container)
+    })
+
+    let logup  = document.querySelector("#logup");
+    // logup.addEventListener("click", () =>{
+    //     window.location.href = "login.html"
+    // })
+    
+    // console.log(getData, appendData);
+    logstatus(logup);
+    
+    
+
     document.querySelector("#search_button").addEventListener("click", () =>{
         let searchedtext = document.querySelector("#video").value;
-        let url = `https://youtube.googleapis.com/youtube/v3/search?part=snippet&q=${searchedtext}&type=Video&key=AIzaSyCzT1ZkIhE3GE0nmGNujgBB05T0hYJXftU&maxResults=50`;
+        let url = `https://youtube.googleapis.com/youtube/v3/search?part=snippet&q=${searchedtext}&type=Video&key=AIzaSyCe6np576bNjMCTXCWMeNCQyqPzMtNwSIk&maxResults=50`;
         let response = getData(url);
         response.then((res) =>{
             // container.innerHTML = "";
