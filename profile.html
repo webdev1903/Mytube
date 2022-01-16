@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="./styles/header.css" rel="stylesheet">
+    <style>
+        #profile{
+            margin-top: 100px;
+            text-align: center;
+        }
+        table{
+            text-align: justify;
+            margin: auto;
+            font-size: xx-large;
+        }
+        td{
+            height: 50px;
+            border-bottom: 5px solid rgb(3, 181, 204);
+        }
+    </style>
+    
+</head>
+<body>
+    <div id="header"></div>
+    <div id="profile">
+        <!-- <h1>My Account</h1> -->
+    </div>
+</body>
+</html>
+<script type="module">
+
+    import navbar from "./components/navbar.js"
+    document.querySelector("#header").innerHTML = navbar();
+
+    let logstatus = JSON.parse(localStorage.getItem("logstatus"));
+    let username = logstatus.username;
+    let token = logstatus.token;
+    console.log(username,token);
+    let url = `https://masai-api-mocker.herokuapp.com/user/${username}`
+    let response = fetch(url, {
+        headers:{
+            "Content-Type":"application/json",
+            Authorization:`Bearer ${token}`
+        },
+        
+    });
+    response.then((res) =>{
+        return res.json();
+    }).then((res) =>{
+        console.log(res);
+        appendData(res);
+    })
+    
+    let appendData = (data) =>{
+        let x = `<h1>My Account</h1>
+                <table>
+            <tr><td><b>Name : </b></td><td>${data.name}</td></tr>
+            <tr><td><b>Username : </b></td><td>${data.username}</td></tr>
+            <tr><td><b>Mobile : </b></td><td>${data.mobile}</td></tr>
+            <tr><td><b>E-mail : </b></td><td>${data.email}</td></tr>
+            <tr><td><b>Description : </b></td><td>${data.description}</td></tr>
+            </table>`
+            document.querySelector("#profile").innerHTML = x;
+    }
+</script>

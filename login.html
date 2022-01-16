@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            text-align: center;
+        }
+        #login{
+            margin: auto;
+            height: 300px;
+            width: 300px;
+            border: 1px solid black;
+        }
+        img{
+            height: 100px;
+            width: 100px;
+        }
+        
+    </style>
+</head>
+<body>
+    <img src="mytube.png" id="mytubepng">
+    <div id="login">
+        <h1>Login</h1>
+        <form onsubmit="login(event)" id="form">
+            <label>Username</label><br>
+            <input type="text" id="username"/><br><br>
+            <label>Password</label><br>
+            <input type="password" id="password"/><br><br>
+            <input type="submit" value="submit">
+        </form><br><br>
+        <a href="signup.html">Click here to create a new account</a>
+    </div>
+    
+</body>
+</html>
+<script>
+    let logstatus = {
+        login : false,
+    }
+    localStorage.setItem("logstatus", JSON.stringify(logstatus));
+    async function login(e){
+        e.preventDefault();
+
+        try{
+            let login_data = {
+                username: document.querySelector("#username").value,
+                password: document.querySelector("#password").value
+            }
+            login_data = JSON.stringify(login_data);
+
+            let log_api = "https://masai-api-mocker.herokuapp.com/auth/login";
+
+            let response = await fetch(log_api, {
+                method: "POST",
+                body: login_data,
+                headers : {
+                    "Content-Type": "application/json"
+                }
+            })
+
+            let data = await response.json();
+            console.log(data);
+            if(data.error == false){
+                alert("login successful, click ok");
+                let token = data.token;
+                let logstatus = JSON.parse(localStorage.getItem("logstatus"));
+                logstatus.login = true;
+                logstatus.username = document.querySelector("#username").value;
+                logstatus.token = token;
+                localStorage.setItem("logstatus", JSON.stringify(logstatus));
+                window.location.href = "mytube.html";
+            }
+            
+        }
+        catch(error){
+            console.log(error);
+        }
+    }
+</script>
