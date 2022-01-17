@@ -79,7 +79,7 @@ import {getData, appendData, logstatus} from "./scripts/fetchnshow.js";
             document.querySelector("#selected_video").append(iframe);
     }
     function recomm(b){
-    let api = `https://youtube.googleapis.com/youtube/v3/search?part=snippet&q=${b}&type=Video&key=AIzaSyCzT1ZkIhE3GE0nmGNujgBB05T0hYJXftU&maxResults=50`
+    let api = `https://youtube.googleapis.com/youtube/v3/search?part=snippet&q=${b}&type=Video&key=AIzaSyCe6np576bNjMCTXCWMeNCQyqPzMtNwSIk&maxResults=50`
     let res = fetch(api);
     res.then((resp)=>{
         return resp.json();

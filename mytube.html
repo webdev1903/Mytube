@@ -22,81 +22,32 @@
 
     let container = document.querySelector("#search_results");
 
-    let api = "https://youtube.googleapis.com/youtube/v3/search?part=snippet&q=6gQJRkVleHBsb3Jl&type=Video&key=AIzaSyCzT1ZkIhE3GE0nmGNujgBB05T0hYJXftU&maxResults=50";
-    let res = fetch(api);
-    res.then((resp)=>{
-        return resp.json();
-    }).then((resp) =>{
-        console.log(resp);
+    let api = "https://youtube.googleapis.com/youtube/v3/search?part=snippet&q=6gQJRkVleHBsb3Jl&type=Video&key=AIzaSyCe6np576bNjMCTXCWMeNCQyqPzMtNwSIk&maxResults=50";
+    let res = getData(api);
+    res.then((resp) =>{
+        // console.log(resp);
         container.innerHTML = "";
-        appendData(resp.items, container)
+        appendData(resp, container)
     })
 
     let logup  = document.querySelector("#logup");
-    // logup.addEventListener("click", () =>{
-    //     window.location.href = "login.html"
-    // })
-    
-    // console.log(getData, appendData);
     logstatus(logup);
     
     
-
+    
     document.querySelector("#search_button").addEventListener("click", () =>{
         let searchedtext = document.querySelector("#video").value;
         let url = `https://youtube.googleapis.com/youtube/v3/search?part=snippet&q=${searchedtext}&type=Video&key=AIzaSyCe6np576bNjMCTXCWMeNCQyqPzMtNwSIk&maxResults=50`;
         let response = getData(url);
         response.then((res) =>{
-            // container.innerHTML = "";
+            container.innerHTML = "";
+            // console.log(res);
+            
             appendData(res, container);
         })
-        // console.log(response);
+        
     })
-
-    // async function searchVideo(){
-
-    //     try{
-    //     let searchedtext = document.querySelector("#video").value;
-    // const url = `https://youtube.googleapis.com/youtube/v3/search?part=snippet&q=${searchedtext}&type=Video&key=AIzaSyCzT1ZkIhE3GE0nmGNujgBB05T0hYJXftU&maxResults=50`;
-    // let api = await fetch(url);
-    // let res = await api.json();
-    // let videos = res.items;
-    // // console.log(videos);
-    // appendVidoes(videos);
-    //     }
-    //     catch{
-    //         alert("No results found");
-    //     }
-    
-    // }
-
-    // const appendVidoes = (arr) =>{
-    //     document.querySelector("#search_results").innerHTML = "";
-    //     arr.forEach(({snippet, id:{videoId}}) =>{
-    //         // let {id:{videoId}} = elem;
-    //         console.log(snippet);
-    //         let div = document.createElement("div");
-    //         let title = document.createElement("p");
-    //         title.textContent = snippet.title;
-    //         let thumbnail = document.createElement("img");
-    //         thumbnail.src = snippet.thumbnails.medium.url;
-    //         let datatosend = {
-    //             snippet,
-    //             videoId
-    //         }
-    //         div.append(thumbnail,title);
-    //         div.onclick = () =>{
-    //             showVideo(datatosend);
-    //         }
-            
-    //         document.querySelector("#search_results").append(div);
-    //     })
-    // }
-
-    // let showVideo = (a) =>{
-    //     localStorage.setItem("a", JSON.stringify(a));
-    //     window.location.href = "video.html";
-    // }
 </script>
 <!-- <iframe width="560" height="315" src="https://www.youtube.com/embed/6ce11_sIhc0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> -->
 <!-- https://www.googleapis.com/youtube/v3/videos?part=contentDetails&chart=mostPopular&regionCode=IN&maxResults=25&key=AIzaSyCzT1ZkIhE3GE0nmGNujgBB05T0hYJXftU -->
+<!-- https://youtube.googleapis.com/youtube/v3/search?part=snippet&q=${searchedtext}&type=Video&key=AIzaSyCe6np576bNjMCTXCWMeNCQyqPzMtNwSIk&maxResults=50 -->
